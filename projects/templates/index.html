@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Crowdfunding Home</h1>
+
+  <p>Welcome to <em>Open Hand Platform</em>.
+
+<h2>Stats</h2>
+
+  <p>Platform has the following record counts:</p>
+  <ul>
+    <li><strong>Organizations:</strong> {{ num_organizations }}</li>
+    <li><strong>Campaigns:</strong> {{ num_campaigns }}</li>
+    <li><strong>Successful Campaigns:</strong> {{ num_successful_campaigns }}</li>
+    <li><strong>Authors:</strong> {{ num_users }}</li>
+  </ul>
+
+{% endblock %}
