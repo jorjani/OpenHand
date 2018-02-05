@@ -1,5 +1,26 @@
 from django.shortcuts import render
 from .models import Campaign, Organization, Donation, User
+from django.views import generic
+
+
+class OrganizationListView(generic.ListView):
+    model = Organization
+    #context_object_name = 'all_org_list'  # your own name for the list as a template variable
+    #queryset = Organization.objects.filter(name__icontains='foundation')[:5]
+    #template_name = 'organizations/my_arbitrary_template_name_list.html'  # Specify your own template name/location
+
+    #def get_queryset(self):
+    #   return Organization.objects.filter(name__icontains='child')[:5]  # Get 5 organizations containing child
+
+
+class OrganizationDetailView(generic.DetailView):
+    model = Organization
+
+class CampaignListView(generic.ListView):
+    model = Campaign
+
+class CampaignDetailView(generic.DetailView):
+    model = Campaign
 
 
 def index(request):

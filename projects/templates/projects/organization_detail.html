@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ organization.name }}</h1>
+
+  <p><strong>description:</strong> {{ organization.description }}</p>
+
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Campaigns</h4>
+
+    {% for campaign in organization.campaign_set.all %}
+    <hr>
+    <p class="{% if campaign.status == 'a' %}text-success{% elif campaign.status == 'm' %}text-danger
+    {% else %}text-warning{% endif %}">{{ campaign.get_status_display }}</p>
+    <p class="text-muted"><strong>Id:</strong> {{campaign.id}}</p>
+    {% endfor %}
+  </div>'''
+{% endblock %}

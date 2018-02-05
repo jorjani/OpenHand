@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Campaign(models.Model):
@@ -14,7 +15,6 @@ class Campaign(models.Model):
     )
     status = models.CharField(max_length=1, choices=FUNDING_STATUS, blank=True, default='m', help_text='Campaign Funding Status')
 
-
     def __str__(self):
         return self.name
 
@@ -23,6 +23,7 @@ class Campaign(models.Model):
         Returns the url to access a particular instance of the model.
         """
         return reverse('model-detail-view', args=[str(self.id)])
+
 
 class Organization(models.Model):
     name = models.CharField(max_length = 40)
@@ -35,16 +36,10 @@ class Organization(models.Model):
         """
         Returns the url to access a particular instance of the model.
         """
-        return reverse('model-detail-view', args=[str(self.id)])
-
-
-import uuid  # Required for unique book instances
+        return reverse('organization', args=[str(self.id)])
 
 
 class User(models.Model):
-    """
-    Model representing a user.
-    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
@@ -64,12 +59,11 @@ class User(models.Model):
         """
         return '{0}, {1}'.format(self.last_name, self.first_name)
 
+
 class Donation(models.Model):
         """
         Model representing a specific copy of a book (i.e. that can be borrowed from the library).
         """
-        id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                              help_text="Unique ID for this particular donation")
         campaign = models.ForeignKey('Campaign', on_delete=models.SET_NULL, null=True)
         donor = models.ForeignKey('User', on_delete = "Protect")
         date = models.DateField(null=True, blank=True)
