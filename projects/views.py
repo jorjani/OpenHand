@@ -2,8 +2,6 @@ from django.shortcuts import render
 from .models import Campaign, Organization, Donation, User
 from django.views import generic
 
-@application.route('/')
-@application.route('/index')
 
 class OrganizationListView(generic.ListView):
     model = Organization
